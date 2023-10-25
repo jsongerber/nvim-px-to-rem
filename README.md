@@ -83,7 +83,7 @@ require("nvim-px-to-rem").setup({
 
 ### nvim-cmp integration
 
-If you want to be able to convert px to rem as you type you need to install [nvim-cmp](hrsh7th/nvim-cmp) and add the plugin to your cmp sources:
+If you want to be able to convert px to rem as you type you need to install [nvim-cmp](https://github.com/hrsh7th/nvim-cmp) and add the plugin to your cmp sources:
 
 ```lua
 require("cmp").setup({
