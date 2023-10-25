@@ -38,7 +38,12 @@ https://github.com/jsongerber/nvim-px-to-rem/assets/18051702/9ac54364-2115-4c9e-
 <td>
 
 ```lua
-use {"jsongerber/nvim-px-to-rem"}
+use {
+    'jsongerber/nvim-px-to-rem',
+    config = function()
+        require('nvim-px-to-rem').setup()
+    end
+}
 ```
 
 </td>
@@ -52,7 +57,10 @@ use {"jsongerber/nvim-px-to-rem"}
 <td>
 
 ```lua
-Plug "jsongerber/nvim-px-to-rem"
+Plug 'jsongerber/nvim-px-to-rem
+
+" Somewhere after plug#end()
+lua require('nvim-px-to-rem').setup()
 ```
 
 </td>
@@ -66,7 +74,15 @@ Plug "jsongerber/nvim-px-to-rem"
 <td>
 
 ```lua
-require("lazy").setup({"jsongerber/nvim-px-to-rem"})
+-- add this to your lua/plugins.lua, lua/plugins/init.lua,  or the file you keep your other plugins:
+{
+    'jsongerber/nvim-px-to-rem',
+    config = true,
+    --If you need to set some options replace the line above with:
+    -- config = function()
+    --     require('nvim-px-to-rem').setup()
+    -- end,
+}
 ```
 
 </td>
