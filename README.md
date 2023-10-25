@@ -3,7 +3,7 @@
 > Easily work with rem in your css files
 
 <div align="center">
-https://github.com/jsongerber/nvim-px-to-rem/assets/18051702/ae464980-2486-4ad0-9a85-f198767b16e1
+    https://github.com/jsongerber/nvim-px-to-rem/assets/18051702/625fd401-b75f-4587-bf83-60879694b05a
 </div>
 
 ## ⚡️ Features
