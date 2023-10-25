@@ -81,8 +81,6 @@ require("lazy").setup({"jsongerber/nvim-px-to-rem"})
 
 ## ⚙ Configuration
 
-> **Note**: The options are also available in Neovim by calling `:h nvim-px-to-rem.options`
-
 ```lua
 -- Those are the default values and can be ommited
 require("nvim-px-to-rem").setup({
