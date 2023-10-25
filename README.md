@@ -54,10 +54,6 @@ lua require('nvim-px-to-rem').setup()
 }
 ```
 
-## ☄ Getting started
-
-> Describe how to use the plugin the simplest way
-
 ## ⚙ Configuration
 
 ```lua
@@ -84,6 +80,20 @@ require("nvim-px-to-rem").setup({
 | `add_cmp_source`    | Add a nvim-cmp source to convert px to rem as you type (require [nvim-cmp](https://github.com/hrsh7th/nvim-cmp)) | `true`                    |
 | `disable_keymaps`   | Disable the default keymaps                                                                                      | `false`                   |
 | `filetypes`         | The filetypes to enable the plugin on                                                                            | `{"css", "scss", "sass"}` |
+
+### nvim-cmp integration
+
+If you want to be able to convert px to rem as you type you need to install [nvim-cmp](hrsh7th/nvim-cmp) and add the plugin to your cmp sources:
+
+```lua
+require("cmp").setup({
+    -- other config
+    sources = cmp.config.sources({
+        { name = "nvim-px-to-rem" },
+        -- other sources
+    }),
+})
+```
 
 ## 🧰 Commands
 
