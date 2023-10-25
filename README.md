@@ -20,22 +20,7 @@ https://github.com/jsongerber/nvim-px-to-rem/assets/18051702/9ac54364-2115-4c9e-
 
 ## 📋 Installation
 
-<div align="center">
-<table>
-<thead>
-<tr>
-<th>Package manager</th>
-<th>Snippet</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-
-[wbthomason/packer.nvim](https://github.com/wbthomason/packer.nvim)
-
-</td>
-<td>
+- With [packer.nvim](https://github.com/wbthomason/packer.nvim)
 
 ```lua
 use {
@@ -46,15 +31,7 @@ use {
 }
 ```
 
-</td>
-</tr>
-<tr>
-<td>
-
-[junegunn/vim-plug](https://github.com/junegunn/vim-plug)
-
-</td>
-<td>
+- With [vim-plug](https://github.com/junegunn/vim-plug)
 
 ```lua
 Plug 'jsongerber/nvim-px-to-rem
@@ -63,15 +40,7 @@ Plug 'jsongerber/nvim-px-to-rem
 lua require('nvim-px-to-rem').setup()
 ```
 
-</td>
-</tr>
-<tr>
-<td>
-
-[folke/lazy.nvim](https://github.com/folke/lazy.nvim)
-
-</td>
-<td>
+- With [folke/lazy.nvim](https://github.com/folke/lazy.nvim)
 
 ```lua
 -- add this to your lua/plugins.lua, lua/plugins/init.lua,  or the file you keep your other plugins:
@@ -84,12 +53,6 @@ lua require('nvim-px-to-rem').setup()
     -- end,
 }
 ```
-
-</td>
-</tr>
-</tbody>
-</table>
-</div>
 
 ## ☄ Getting started
 
