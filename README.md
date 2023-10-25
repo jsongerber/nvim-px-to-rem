@@ -3,7 +3,7 @@
 > Easily work with rem in your css files
 
 <div align="center">
-    > Drag your video (<10MB) here to host it for free on GitHub.
+https://github.com/jsongerber/nvim-px-to-rem/assets/18051702/ae464980-2486-4ad0-9a85-f198767b16e1
 </div>
 
 ## ⚡️ Features
