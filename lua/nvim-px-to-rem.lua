@@ -4,7 +4,7 @@ local utils = require("utils")
 
 M.options = {
 	font_size = 16,
-	decimal_count = 3,
+	decimal_count = 4,
 	show_virtual_text = true,
 	add_cmp_source = true,
 	disable_keymaps = false,

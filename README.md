@@ -5,10 +5,9 @@
 A Neovim plugin writter in lua to convert px to rem as you type. It also provide commands and keymaps to convert px to rem and a virtual text to visualize your rem values.
 
 <div align="center">
-    
+
 
 https://github.com/jsongerber/nvim-px-to-rem/assets/18051702/9ac54364-2115-4c9e-8354-f0991f11c82d
-
 
 </div>
 
@@ -60,7 +59,7 @@ lua require('nvim-px-to-rem').setup()
 -- Those are the default values and can be ommited
 require("nvim-px-to-rem").setup({
     font_size = 16,
-    decimal_count = 3,
+    decimal_count = 4,
     show_virtual_text = true,
     add_cmp_source = true,
     disable_keymaps = false,
@@ -75,7 +74,7 @@ require("nvim-px-to-rem").setup({
 | Option              | Description                                                                                                      | Default value             |
 | ------------------- | ---------------------------------------------------------------------------------------------------------------- | ------------------------- |
 | `font_size`         | The font size used to convert px to rem                                                                          | `16`                      |
-| `decimal_count`     | The number of decimal to keep when converting px to rem                                                          | `3`                       |
+| `decimal_count`     | The number of decimal to keep when converting px to rem                                                          | `4`                       |
 | `show_virtual_text` | Show the rem value in a virtual text                                                                             | `true`                    |
 | `add_cmp_source`    | Add a nvim-cmp source to convert px to rem as you type (require [nvim-cmp](https://github.com/hrsh7th/nvim-cmp)) | `true`                    |
 | `disable_keymaps`   | Disable the default keymaps                                                                                      | `false`                   |
