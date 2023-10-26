@@ -3,7 +3,7 @@ local M = {}
 local utils = require("utils")
 
 M.options = {
-	font_size = 16,
+	root_font_size = 16,
 	decimal_count = 4,
 	show_virtual_text = true,
 	add_cmp_source = true,
@@ -39,8 +39,11 @@ M.setup = function(options)
 			return
 		end
 
-		local source =
-			require("nvim-px-to-rem-cmp").add_to_cmp(M.options.font_size, M.options.decimal_count, M.options.filetypes)
+		local source = require("nvim-px-to-rem-cmp").add_to_cmp(
+			M.options.root_font_size,
+			M.options.decimal_count,
+			M.options.filetypes
+		)
 
 		cmp.register_source("nvim_px_to_rem", source.new())
 	end
@@ -72,7 +75,7 @@ M.px_to_rem = function()
 
 	for rem in line_content:gmatch("(-?%d+%.?%d*)rem") do
 		local rem_size = tonumber(rem)
-		local px_size = rem_size * M.options.font_size
+		local px_size = rem_size * M.options.root_font_size
 		local pxrem = string.format("%spx", tostring(utils.round(px_size, M.options.decimal_count)))
 		table.insert(virtual_text, pxrem)
 	end
@@ -115,7 +118,7 @@ M.px_to_rem_at_cursor = function()
 		return
 	end
 
-	local rem_size = px_size / M.options.font_size
+	local rem_size = px_size / M.options.root_font_size
 	local rem = string.format("%srem", tostring(utils.round(rem_size, M.options.decimal_count)))
 
 	local rem_with_str = input:gsub(regex .. "px", rem)
@@ -135,7 +138,7 @@ M.px_to_rem_on_line = function()
 
 	for rem in line_content:gmatch("(-?%d+%.?%d*)px") do
 		local rem_size = tonumber(rem)
-		local px_size = rem_size / M.options.font_size
+		local px_size = rem_size / M.options.root_font_size
 		local pxrem = string.format("%srem", tostring(utils.round(px_size, M.options.decimal_count)))
 
 		local rem_with_str = line_content:gsub("(-?%d+%.?%d*)px", pxrem, 1)
