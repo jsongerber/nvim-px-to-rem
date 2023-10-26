@@ -75,7 +75,7 @@ require("nvim-px-to-rem").setup({
 | ------------------- | ---------------------------------------------------------------------------------------------------------------- | ------------------------- |
 | `root_font_size`         | The font size used to convert px to rem                                                                          | `16`                      |
 | `decimal_count`     | The number of decimal to keep when converting px to rem                                                          | `4`                       |
-| `show_virtual_text` | Show the rem value in a virtual text                                                                             | `true`                    |
+| `show_virtual_text` | Show the rem value converted in px in a virtual text                                                                             | `true`                    |
 | `add_cmp_source`    | Add a nvim-cmp source to convert px to rem as you type (require [nvim-cmp](https://github.com/hrsh7th/nvim-cmp)) | `true`                    |
 | `disable_keymaps`   | Disable the default keymaps                                                                                      | `false`                   |
 | `filetypes`         | The filetypes to enable the plugin on                                                                            | `{"css", "scss", "sass"}` |
@@ -122,8 +122,8 @@ PRs and issues are always welcome. Make sure to provide as much context as possi
 
 ## 🎭 Motivations
 
-Inspired by the VS Code plugin [px to rem & rpx & vw (cssrem)](https://marketplace.visualstudio.com/items?itemName=cipchk.cssrem)
-There is two vim plugin to convert px to (r)em but those were missing some feature I wanted such as the virtual text and the nvim-cmp integration:
+Inspired by the VS Code plugin [px to rem & rpx & vw (cssrem)](https://marketplace.visualstudio.com/items?itemName=cipchk.cssrem).  
+There is two vim plugin to convert px to \(r\)em but those were missing some feature I wanted such as the virtual text and the nvim-cmp integration:
 
 - [vim-px-to-em](https://github.com/chiedo/vim-px-to-em)
 - [vim-px-to-rem](https://github.com/Oldenborg/vim-px-to-rem)
@@ -131,6 +131,8 @@ There is two vim plugin to convert px to (r)em but those were missing some featu
 ## 📝 TODO
 
 - [ ] Use Treesitter
+- [ ] Write tests
+- [ ] Write documentation
 
 ## 📜 License
 
