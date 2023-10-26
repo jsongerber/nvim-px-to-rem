@@ -88,7 +88,7 @@ If you want to be able to convert px to rem as you type you need to install [nvi
 require("cmp").setup({
     -- other config
     sources = cmp.config.sources({
-        { name = "nvim-px-to-rem" },
+        { name = "nvim_px_to_rem" },
         -- other sources
     }),
 })
