@@ -123,13 +123,7 @@ M.px_to_rem_at_cursor = function()
 
 	local rem_with_str = input:gsub(regex .. "px", rem)
 
-	vim.cmd("normal! diW")
-	local cursor_at_end = vim.fn.getpos(".")[3] + 1 == vim.fn.col("$")
-	if cursor_at_end then
-		vim.cmd("normal! a" .. rem_with_str)
-	else
-		vim.cmd("normal! i" .. rem_with_str)
-	end
+	vim.cmd("normal! ciW" .. rem_with_str)
 end
 
 M.px_to_rem_on_line = function()
