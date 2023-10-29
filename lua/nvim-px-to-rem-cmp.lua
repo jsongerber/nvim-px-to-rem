@@ -17,6 +17,10 @@ M.add_to_cmp = function(font_size, decimal_count, filetypes)
 		return [[\d\+\(.\d\+\)\?\(px\?\)\?]]
 	end
 
+	source.is_available = function()
+		return vim.tbl_contains(filetypes, vim.bo.filetype)
+	end
+
 	source.complete = function(self, params, callback)
 		-- Check if filetype is in the list
 		if not vim.tbl_contains(filetypes, params.context.filetype) then
