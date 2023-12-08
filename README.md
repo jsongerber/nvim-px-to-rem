@@ -64,7 +64,7 @@ require("nvim-px-to-rem").setup({
     add_cmp_source = true,
     disable_keymaps = false,
     filetypes = {
-        root_"css",
+        "css",
         "scss",
         "sass",
     },
