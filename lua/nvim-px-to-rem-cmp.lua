@@ -24,9 +24,6 @@ M.add_to_cmp = function(font_size, decimal_count, filetypes)
 	source.complete = function(self, params, callback)
 		local input = string.sub(params.context.cursor_before_line, params.offset)
 		local px = string.match(input, "%d+%.?%d*")
-		vim.print(params)
-		vim.print("input: " .. input)
-		vim.print("px: " .. px)
 
 		local px_size = tonumber(px)
 		local rem_size = px_size / font_size
