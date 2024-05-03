@@ -2,6 +2,11 @@ local utils = require("utils")
 
 local M = {}
 
+---@return string
+M.get_keyword_pattern = function()
+	return [[\d\+\(\.\d\+\)\?\(px\?\)\?]]
+end
+
 M.add_to_cmp = function(font_size, decimal_count, filetypes)
 	local source = {}
 
@@ -14,7 +19,7 @@ M.add_to_cmp = function(font_size, decimal_count, filetypes)
 	source.get_keyword_pattern = function()
 		-- return [=[\%(\s\|^\)\zs:[[:alnum:]_\-\+]*:\?]=]
 		-- return "(%d+%.?%d*)px"
-		return [[\d\+\(\.\d\+\)\?\(px\?\)\?]]
+		return M.get_keyword_pattern()
 	end
 
 	source.is_available = function()
@@ -39,6 +44,7 @@ M.add_to_cmp = function(font_size, decimal_count, filetypes)
 
 		self.items = items
 		local is_incomplete = string.find(input, "(-?%d+%.?%d*)px") == nil
+
 		callback({ items = items, isIncomplete = is_incomplete })
 	end
 
