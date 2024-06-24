@@ -97,10 +97,11 @@ M.px_to_rem = function()
 		vim.api.nvim_buf_del_extmark(0, M.namespace, M.namespace)
 	end
 
-	if #virtual_text > 0 then
+	local ns_id = tonumber(M.namespace)
+	if #virtual_text > 0 and ns_id ~= nil then
 		vim.api.nvim_buf_set_extmark(
 			0,
-			tonumber(M.namespace),
+			ns_id,
 			line - 1,
 			0,
 			{
