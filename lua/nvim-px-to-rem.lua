@@ -33,20 +33,31 @@ M.setup = function(options)
 	end
 
 	if M.options.add_cmp_source then
-		local cmp = require("cmp")
+		-- Only load cmp when we enter insert mode
+		vim.api.nvim_create_autocmd({ "InsertEnter" }, {
+			once = true,
+			pattern = vim.tbl_map(function(filetype)
+				return "*" .. filetype
+			end, M.options.filetypes),
+			callback = function(args)
+				local cmp = require("cmp")
 
-		if not cmp then
-			return
-		end
+				if not cmp then
+					return
+				end
 
-		local source = require("nvim-px-to-rem-cmp").add_to_cmp(
-			M.options.root_font_size,
-			M.options.decimal_count,
-			M.options.filetypes
-		)
+				local source = require("nvim-px-to-rem-cmp").add_to_cmp(
+					M.options.root_font_size,
+					M.options.decimal_count,
+					M.options.filetypes
+				)
 
-		cmp.register_source("nvim_px_to_rem", source.new())
+				cmp.register_source("nvim_px_to_rem", source.new())
+				vim.api.nvim_del_autocmd(args.id)
+			end,
+		})
 	end
+
 	return M.options
 end
 
