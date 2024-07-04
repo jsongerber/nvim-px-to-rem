@@ -137,3 +137,10 @@ There is two vim plugin to convert px to \(r\)em but those were missing some fea
 ## 📜 License
 
 MIT © [jsongerber](https://github.com/jsongerber/nvim-px-to-rem/blob/master/LICENSE)
+
+## Shameless plug
+
+See my other plugins:
+- [thanks.nvim](https://github.com/jsongerber/thanks.nvim): A plugin to show your appreciation to the maintainers of the plugin you use.
+- [telescope-ssh-config](https://github.com/jsongerber/telescope-ssh-config): A plugin to list and connect to ssh hosts with telescope.nvim.
+
