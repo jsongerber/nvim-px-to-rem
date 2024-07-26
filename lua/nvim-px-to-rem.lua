@@ -87,7 +87,7 @@ M.px_to_rem = function()
 	for rem in line_content:gmatch("(-?%d+%.?%d*)rem") do
 		local rem_size = tonumber(rem)
 		local px_size = rem_size * M.options.root_font_size
-		local pxrem = string.format("%spx", tostring(utils.round(px_size, M.options.decimal_count)))
+		local pxrem = string.format("%spx", tostring(utils.round(tostring(px_size), M.options.decimal_count)))
 		table.insert(virtual_text, pxrem)
 	end
 
@@ -115,9 +115,16 @@ M.px_to_rem = function()
 end
 
 M.px_to_rem_at_cursor = function()
+	vim.go.operatorfunc = "v:lua.require'nvim-px-to-rem'.dot_px_to_rem_at_cursor"
+	return "g@l"
+end
+
+M.dot_px_to_rem_at_cursor = function()
 	local regex = "%d+%.?%d*"
 
-	local input = vim.fn.expand("<cWORD>")
+	local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+	local line_content = vim.api.nvim_buf_get_lines(0, line - 1, line, false)[1]
+	local input, word_start, word_end = unpack(utils.get_start_of_word_under_cursor(line_content, col))
 	local px = string.match(input, regex)
 
 	if px == nil then
@@ -131,26 +138,30 @@ M.px_to_rem_at_cursor = function()
 	end
 
 	local rem_size = px_size / M.options.root_font_size
-	local rem = string.format("%srem", tostring(utils.round(rem_size, M.options.decimal_count)))
+	local rem = string.format("%srem", tostring(utils.round(tostring(rem_size), M.options.decimal_count)))
 
-	local rem_with_str = input:gsub(regex .. "px", rem)
-
-	vim.cmd("normal! ciW" .. rem_with_str)
+	vim.api.nvim_buf_set_text(0, line - 1, word_start, line - 1, word_end, { rem })
 end
 
 M.px_to_rem_on_line = function()
+	vim.go.operatorfunc = "v:lua.require'nvim-px-to-rem'.dot_px_to_rem_on_line"
+	return "g@l"
+end
+
+M.dot_px_to_rem_on_line = function()
 	local line = vim.api.nvim_win_get_cursor(0)[1]
 	local line_content = vim.api.nvim_buf_get_lines(0, line - 1, line, false)[1]
+	local new_line = line_content
 
 	for rem in line_content:gmatch("(-?%d+%.?%d*)px") do
 		local rem_size = tonumber(rem)
 		local px_size = rem_size / M.options.root_font_size
-		local pxrem = string.format("%srem", tostring(utils.round(px_size, M.options.decimal_count)))
+		local pxrem = string.format("%srem", tostring(utils.round(string(px_size), M.options.decimal_count)))
 
-		local rem_with_str = line_content:gsub("(-?%d+%.?%d*)px", pxrem, 1)
-		vim.api.nvim_buf_set_lines(0, line - 1, line, false, { rem_with_str })
-
-		line_content = vim.api.nvim_buf_get_lines(0, line - 1, line, false)[1]
+		new_line = new_line:gsub("(-?%d+%.?%d*)px", pxrem, 1)
 	end
+
+	vim.api.nvim_buf_set_lines(0, line - 1, line, false, { new_line })
 end
+
 return M
