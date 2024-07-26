@@ -2,10 +2,9 @@
 
 > Easily work with rem in your css files
 
-A Neovim plugin written in lua to convert px to rem as you type. It also provide commands and keymaps to convert px to rem and a virtual text to visualize your rem values.
+A Neovim plugin written in lua to convert px to rem as you type. It also provide commands and [~~keymaps~~](#📚-keymaps) to convert px to rem and a virtual text to visualize your rem values.
 
 <div align="center">
-
 
 https://github.com/jsongerber/nvim-px-to-rem/assets/18051702/9ac54364-2115-4c9e-8354-f0991f11c82d
 
@@ -13,13 +12,13 @@ https://github.com/jsongerber/nvim-px-to-rem/assets/18051702/9ac54364-2115-4c9e-
 
 ## ⚡️ Features
 
-- Easily convert px to rem as you type (require [nvim-cmp](https://github.com/hrsh7th/nvim-cmp))
-- Convert px to rem on a single value or a whole line
-- Visualize your rem values in a virtual text
+-   Easily convert px to rem as you type (require [nvim-cmp](https://github.com/hrsh7th/nvim-cmp))
+-   Convert px to rem on a single value or a whole line
+-   Visualize your rem values in a virtual text
 
 ## 📋 Installation
 
-- With [packer.nvim](https://github.com/wbthomason/packer.nvim)
+-   With [packer.nvim](https://github.com/wbthomason/packer.nvim)
 
 ```lua
 use {
@@ -30,7 +29,7 @@ use {
 }
 ```
 
-- With [vim-plug](https://github.com/junegunn/vim-plug)
+-   With [vim-plug](https://github.com/junegunn/vim-plug)
 
 ```lua
 Plug 'jsongerber/nvim-px-to-rem
@@ -39,7 +38,7 @@ Plug 'jsongerber/nvim-px-to-rem
 lua require('nvim-px-to-rem').setup()
 ```
 
-- With [folke/lazy.nvim](https://github.com/folke/lazy.nvim)
+-   With [folke/lazy.nvim](https://github.com/folke/lazy.nvim)
 
 ```lua
 -- add this to your lua/plugins.lua, lua/plugins/init.lua,  or the file you keep your other plugins:
@@ -62,7 +61,6 @@ require("nvim-px-to-rem").setup({
     decimal_count = 4,
     show_virtual_text = true,
     add_cmp_source = true,
-    disable_keymaps = false,
     filetypes = {
         "css",
         "scss",
@@ -73,11 +71,10 @@ require("nvim-px-to-rem").setup({
 
 | Option              | Description                                                                                                      | Default value             |
 | ------------------- | ---------------------------------------------------------------------------------------------------------------- | ------------------------- |
-| `root_font_size`         | The font size used to convert px to rem                                                                          | `16`                      |
+| `root_font_size`    | The font size used to convert px to rem                                                                          | `16`                      |
 | `decimal_count`     | The number of decimal to keep when converting px to rem                                                          | `4`                       |
-| `show_virtual_text` | Show the rem value converted in px in a virtual text                                                                             | `true`                    |
+| `show_virtual_text` | Show the rem value converted in px in a virtual text                                                             | `true`                    |
 | `add_cmp_source`    | Add a nvim-cmp source to convert px to rem as you type (require [nvim-cmp](https://github.com/hrsh7th/nvim-cmp)) | `true`                    |
-| `disable_keymaps`   | Disable the default keymaps                                                                                      | `false`                   |
 | `filetypes`         | The filetypes to enable the plugin on                                                                            | `{"css", "scss", "sass"}` |
 
 ### nvim-cmp integration
@@ -103,17 +100,15 @@ require("cmp").setup({
 
 ## 📚 Keymaps
 
-| Keymap        | Description                         |
-| ------------- | ----------------------------------- |
-| `<leader>px`  | Convert px to rem under cursor      |
-| `<leader>pxl` | Convert px to rem on the whole line |
+> [!WARNING]
+> This plugin used to provide default keymaps but it was removed as it was poorly chosen.
+> If you used default keymaps you will need to set them yourself.
 
-You can disable the default keymaps by setting `disable_keymaps` to `true` and then create your own:
+You can set keymaps like so:
 
 ```lua
--- Those are the default keymaps, you can change them to whatever you want
-vim.api.nvim_set_keymap("n", "<leader>px", ":PxToRemCursor<CR>", {noremap = true})
-vim.api.nvim_set_keymap("n", "<leader>pxl", ":PxToRemLine<CR>", {noremap = true})
+vim.api.nvim_set_keymap("n", "<leader>pxx", ":PxToRemCursor<CR>", { noremap = true })
+vim.api.nvim_set_keymap("n", "<leader>pxl", ":PxToRemLine<CR>", { noremap = true })
 ```
 
 ## ⌨ Contributing
@@ -125,14 +120,14 @@ PRs and issues are always welcome. Make sure to provide as much context as possi
 Inspired by the VS Code plugin [px to rem & rpx & vw (cssrem)](https://marketplace.visualstudio.com/items?itemName=cipchk.cssrem).  
 There is two vim plugin to convert px to \(r\)em but those were missing some feature I wanted such as the virtual text and the nvim-cmp integration:
 
-- [vim-px-to-em](https://github.com/chiedo/vim-px-to-em)
-- [vim-px-to-rem](https://github.com/Oldenborg/vim-px-to-rem)
+-   [vim-px-to-em](https://github.com/chiedo/vim-px-to-em)
+-   [vim-px-to-rem](https://github.com/Oldenborg/vim-px-to-rem)
 
 ## 📝 TODO
 
-- [ ] Use Treesitter
-- [ ] Write tests
-- [ ] Write documentation
+-   [ ] Use Treesitter
+-   [ ] Write tests
+-   [ ] Write documentation
 
 ## 📜 License
 
@@ -141,6 +136,6 @@ MIT © [jsongerber](https://github.com/jsongerber/nvim-px-to-rem/blob/master/LIC
 ## Shameless plug
 
 See my other plugins:
-- [thanks.nvim](https://github.com/jsongerber/thanks.nvim): A plugin to show your appreciation to the maintainers of the plugin you use.
-- [telescope-ssh-config](https://github.com/jsongerber/telescope-ssh-config): A plugin to list and connect to ssh hosts with telescope.nvim.
 
+-   [thanks.nvim](https://github.com/jsongerber/thanks.nvim): A plugin to show your appreciation to the maintainers of the plugin you use.
+-   [telescope-ssh-config](https://github.com/jsongerber/telescope-ssh-config): A plugin to list and connect to ssh hosts with telescope.nvim.
