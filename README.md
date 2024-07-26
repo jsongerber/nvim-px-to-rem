@@ -2,7 +2,7 @@
 
 > Easily work with rem in your css files
 
-A Neovim plugin written in lua to convert px to rem as you type. It also provide commands and [~~keymaps~~](#📚-keymaps) to convert px to rem and a virtual text to visualize your rem values.
+A Neovim plugin written in lua to convert px to rem as you type. It also provide commands and [~~keymaps~~](#-keymaps) to convert px to rem and a virtual text to visualize your rem values.
 
 <div align="center">
 
