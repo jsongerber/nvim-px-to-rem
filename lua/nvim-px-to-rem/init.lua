@@ -4,7 +4,7 @@ M.options = {
 	root_font_size = 16,
 	decimal_count = 4,
 	show_virtual_text = true,
-	add_cmp_source = true,
+	add_cmp_source = false,
 	filetypes = {
 		"css",
 		"scss",

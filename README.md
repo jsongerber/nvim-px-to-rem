@@ -60,6 +60,7 @@ require("nvim-px-to-rem").setup({
     root_font_size = 16,
     decimal_count = 4,
     show_virtual_text = true,
+    add_cmp_source = false,
     filetypes = {
         "css",
         "scss",
@@ -73,7 +74,7 @@ require("nvim-px-to-rem").setup({
 | `root_font_size`    | The font size used to convert px to rem                                                                                                        | `16`          |
 | `decimal_count`     | The number of decimal to keep when converting px to rem                                                                                        | `4`           |
 | `show_virtual_text` | Show the rem value converted in px in a virtual text                                                                                           | `true`        |
-| `add_cmp_source`    | Add a nvim-cmp source to convert px to rem as you type (require [nvim-cmp](https://github.com/hrsh7th/nvim-cmp)), disable if you use blink.cmp | `true`        |
+| `add_cmp_source`    | Add a nvim-cmp source to convert px to rem as you type (require [nvim-cmp](https://github.com/hrsh7th/nvim-cmp)), disable if you use blink.cmp | `false`       |
 
 ### nvim-cmp integration
 
@@ -93,7 +94,8 @@ require("cmp").setup({
 
 ```
 
-Do not forget to set `add_cmp_source` to `true` in the setup function
+> [!IMPORTANT]
+> Do not forget to set `add_cmp_source` to `true` in the setup function
 
 </details>
 
@@ -136,8 +138,6 @@ return {
   },
 }
 ```
-
-Do not forget to set `add_cmp_source` (which is for nvim-cmp and not blink) to `false` in the setup function
 
 </details>
 
