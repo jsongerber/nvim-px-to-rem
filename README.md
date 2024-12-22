@@ -12,13 +12,13 @@ https://github.com/jsongerber/nvim-px-to-rem/assets/18051702/9ac54364-2115-4c9e-
 
 ## ⚡️ Features
 
--   Easily convert px to rem as you type (require [nvim-cmp](https://github.com/hrsh7th/nvim-cmp))
--   Convert px to rem on a single value or a whole line
--   Visualize your rem values in a virtual text
+- Easily convert px to rem as you type (require [nvim-cmp](https://github.com/hrsh7th/nvim-cmp) or [blink.cmp](https://github.com/Saghen/blink.cmp))
+- Convert px to rem on a single value or a whole line
+- Visualize your rem values in a virtual text
 
 ## 📋 Installation
 
--   With [packer.nvim](https://github.com/wbthomason/packer.nvim)
+- With [packer.nvim](https://github.com/wbthomason/packer.nvim)
 
 ```lua
 use {
@@ -29,7 +29,7 @@ use {
 }
 ```
 
--   With [vim-plug](https://github.com/junegunn/vim-plug)
+- With [vim-plug](https://github.com/junegunn/vim-plug)
 
 ```lua
 Plug 'jsongerber/nvim-px-to-rem
@@ -38,7 +38,7 @@ Plug 'jsongerber/nvim-px-to-rem
 lua require('nvim-px-to-rem').setup()
 ```
 
--   With [folke/lazy.nvim](https://github.com/folke/lazy.nvim)
+- With [folke/lazy.nvim](https://github.com/folke/lazy.nvim)
 
 ```lua
 -- add this to your lua/plugins.lua, lua/plugins/init.lua,  or the file you keep your other plugins:
@@ -60,7 +60,6 @@ require("nvim-px-to-rem").setup({
     root_font_size = 16,
     decimal_count = 4,
     show_virtual_text = true,
-    add_cmp_source = true,
     filetypes = {
         "css",
         "scss",
@@ -69,17 +68,19 @@ require("nvim-px-to-rem").setup({
 })
 ```
 
-| Option              | Description                                                                                                      | Default value             |
-| ------------------- | ---------------------------------------------------------------------------------------------------------------- | ------------------------- |
-| `root_font_size`    | The font size used to convert px to rem                                                                          | `16`                      |
-| `decimal_count`     | The number of decimal to keep when converting px to rem                                                          | `4`                       |
-| `show_virtual_text` | Show the rem value converted in px in a virtual text                                                             | `true`                    |
-| `add_cmp_source`    | Add a nvim-cmp source to convert px to rem as you type (require [nvim-cmp](https://github.com/hrsh7th/nvim-cmp)) | `true`                    |
-| `filetypes`         | The filetypes to enable the plugin on                                                                            | `{"css", "scss", "sass"}` |
+| Option              | Description                                                                                                                                    | Default value |
+| ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| `root_font_size`    | The font size used to convert px to rem                                                                                                        | `16`          |
+| `decimal_count`     | The number of decimal to keep when converting px to rem                                                                                        | `4`           |
+| `show_virtual_text` | Show the rem value converted in px in a virtual text                                                                                           | `true`        |
+| `add_cmp_source`    | Add a nvim-cmp source to convert px to rem as you type (require [nvim-cmp](https://github.com/hrsh7th/nvim-cmp)), disable if you use blink.cmp | `true`        |
 
 ### nvim-cmp integration
 
-If you want to be able to convert px to rem as you type you need to install [nvim-cmp](https://github.com/hrsh7th/nvim-cmp) and add the plugin to your cmp sources:
+<details>
+<summary>Show configuration for nvim-cmp</summary>
+
+[nvim-cmp](https://github.com/hrsh7th/nvim-cmp) to convert px to rem as you type.
 
 ```lua
 require("cmp").setup({
@@ -89,7 +90,56 @@ require("cmp").setup({
         -- other sources
     }),
 })
+
 ```
+
+Do not forget to set `add_cmp_source` to `true` in the setup function
+
+</details>
+
+### blink.cmp integration
+
+<details>
+<summary>Show configuration for blink.cmp</summary>
+
+[nvim-cmp](https://github.com/hrsh7th/nvim-cmp) to convert px to rem as you type.
+
+```lua
+return {
+  'saghen/blink.cmp',
+  dependencies = {
+    'jsongerber/nvim-px-to-rem',
+    -- other dependencies
+    -- …
+  },
+  opts = {
+    sources = {
+      default = {
+        -- you need to add this line
+        'nvim-px-to-rem',
+        -- your other sources
+        'lsp',
+        'path',
+        'snippets',
+        'buffer',
+        'lazydev',
+      },
+      providers = {
+        ['nvim-px-to-rem'] = {
+          module = 'nvim-px-to-rem.integrations.blink',
+          name = 'nvim-px-to-rem',
+        },
+        -- other providers
+        -- …
+      },
+    },
+  },
+}
+```
+
+Do not forget to set `add_cmp_source` (which is for nvim-cmp and not blink) to `false` in the setup function
+
+</details>
 
 ## 🧰 Commands
 
@@ -120,14 +170,14 @@ PRs and issues are always welcome. Make sure to provide as much context as possi
 Inspired by the VS Code plugin [px to rem & rpx & vw (cssrem)](https://marketplace.visualstudio.com/items?itemName=cipchk.cssrem).  
 There is two vim plugin to convert px to \(r\)em but those were missing some feature I wanted such as the virtual text and the nvim-cmp integration:
 
--   [vim-px-to-em](https://github.com/chiedo/vim-px-to-em)
--   [vim-px-to-rem](https://github.com/Oldenborg/vim-px-to-rem)
+- [vim-px-to-em](https://github.com/chiedo/vim-px-to-em)
+- [vim-px-to-rem](https://github.com/Oldenborg/vim-px-to-rem)
 
 ## 📝 TODO
 
--   [ ] Use Treesitter
--   [ ] Write tests
--   [ ] Write documentation
+- [ ] Use Treesitter
+- [ ] Write tests
+- [ ] Write documentation
 
 ## 📜 License
 
@@ -137,5 +187,5 @@ MIT © [jsongerber](https://github.com/jsongerber/nvim-px-to-rem/blob/master/LIC
 
 See my other plugins:
 
--   [thanks.nvim](https://github.com/jsongerber/thanks.nvim): A plugin to show your appreciation to the maintainers of the plugin you use.
--   [telescope-ssh-config](https://github.com/jsongerber/telescope-ssh-config): A plugin to list and connect to ssh hosts with telescope.nvim.
+- [thanks.nvim](https://github.com/jsongerber/thanks.nvim): A plugin to show your appreciation to the maintainers of the plugin you use.
+- [telescope-ssh-config](https://github.com/jsongerber/telescope-ssh-config): A plugin to list and connect to ssh hosts with telescope.nvim.

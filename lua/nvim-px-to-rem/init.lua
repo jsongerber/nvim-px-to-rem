@@ -36,29 +36,7 @@ M.setup = function(options)
 	end
 
 	if M.options.add_cmp_source then
-		-- Only load cmp when we enter insert mode
-		vim.api.nvim_create_autocmd({ "InsertEnter" }, {
-			once = true,
-			pattern = vim.tbl_map(function(filetype)
-				return "*" .. filetype
-			end, M.options.filetypes),
-			callback = function(args)
-				local cmp = require("cmp")
-
-				if not cmp then
-					return
-				end
-
-				local source = require("nvim-px-to-rem-cmp").add_to_cmp(
-					M.options.root_font_size,
-					M.options.decimal_count,
-					M.options.filetypes
-				)
-
-				cmp.register_source("nvim_px_to_rem", source.new())
-				vim.api.nvim_del_autocmd(args.id)
-			end,
-		})
+		require("nvim-px-to-rem.integrations.cmp").setup(M.options)
 	end
 
 	return M.options
@@ -86,7 +64,7 @@ M.px_to_rem = function()
 	local line = vim.api.nvim_win_get_cursor(0)[1]
 	local line_content = vim.api.nvim_buf_get_lines(0, line - 1, line, false)[1]
 	local virtual_text = {}
-	local utils = require("utils")
+	local utils = require("nvim-px-to-rem.utils")
 
 	for rem in line_content:gmatch("(-?%d+%.?%d*)rem") do
 		local rem_size = tonumber(rem)
@@ -125,15 +103,11 @@ end
 
 M.dot_px_to_rem_at_cursor = function()
 	local regex = "%d+%.?%d*"
-	local utils = require("utils")
+	local utils = require("nvim-px-to-rem.utils")
 
 	local line, col = unpack(vim.api.nvim_win_get_cursor(0))
 	local line_content = vim.api.nvim_buf_get_lines(0, line - 1, line, false)[1]
-	local input, word_start, word_end = unpack(utils.get_start_of_word_under_cursor(line_content, col))
-	if input == nil then
-		vim.notify("No px value found", vim.log.levels.WARN)
-		return
-	end
+	local input, word_start, word_end = utils.get_start_of_word_under_cursor(line_content, col)
 
 	local px = string.match(input, regex)
 
@@ -164,7 +138,7 @@ M.dot_px_to_rem_on_line = function()
 	local line = vim.api.nvim_win_get_cursor(0)[1]
 	local line_content = vim.api.nvim_buf_get_lines(0, line - 1, line, false)[1]
 	local new_line = line_content
-	local utils = require("utils")
+	local utils = require("nvim-px-to-rem.utils")
 
 	for rem in line_content:gmatch("(-?%d+%.?%d*)px") do
 		local rem_size = tonumber(rem)
