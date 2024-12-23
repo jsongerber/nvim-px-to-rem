@@ -30,7 +30,7 @@ function M:get_completions(context, callback)
 	local input, word_start, word_end = utils.get_start_of_word_under_cursor(context.line, context.cursor[2] - 1)
 
 	if input == "" then
-		callback({})
+		callback()
 		return
 	end
 
