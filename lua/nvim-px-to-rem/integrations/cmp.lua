@@ -30,7 +30,7 @@ function M:complete(params, callback)
 		utils.get_start_of_word_under_cursor(params.context.cursor_line, params.context.cursor.character - 1)
 
 	if input == "" then
-		callback({})
+		callback()
 		return
 	end
 
@@ -43,7 +43,7 @@ function M:complete(params, callback)
 	local items = {
 		{
 			label = px .. "px -> " .. pxrem,
-			filterText = input,
+			-- filterText = input,
 			insertText = pxrem,
 			kind = vim.lsp.protocol.CompletionItemKind.Value,
 			insertTextFormat = vim.lsp.protocol.InsertTextFormat.PlainText,
