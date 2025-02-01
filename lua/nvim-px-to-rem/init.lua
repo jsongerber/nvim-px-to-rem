@@ -12,6 +12,13 @@ M.options = {
 	},
 }
 
+-- operatorfunc doesn't support passing arguments
+M.range = {
+	range = 0,
+	line1 = 0,
+	line2 = 0,
+}
+
 M.setup = function(options)
 	options = options or {}
 
@@ -20,9 +27,13 @@ M.setup = function(options)
 	vim.api.nvim_create_user_command("PxToRemCursor", function()
 		vim.api.nvim_feedkeys(M.px_to_rem_at_cursor(), "n", false)
 	end, {})
-	vim.api.nvim_create_user_command("PxToRemLine", function()
+	vim.api.nvim_create_user_command("PxToRemLine", function(opts)
+		M.range.range = opts.range
+		M.range.line1 = opts.line1
+		M.range.line2 = opts.line2
+
 		vim.api.nvim_feedkeys(M.px_to_rem_on_line(), "n", false)
-	end, {})
+	end, { range = true })
 
 	if M.options.disable_keymaps ~= nil then
 		vim.notify(
@@ -69,7 +80,7 @@ M.px_to_rem = function()
 	for rem in line_content:gmatch("(-?%d+%.?%d*)rem") do
 		local rem_size = tonumber(rem)
 		local px_size = rem_size * M.options.root_font_size
-		local pxrem = string.format("%spx", tostring(utils.round(tostring(px_size), M.options.decimal_count)))
+		local pxrem = string.format("%spx", tostring(utils.round(px_size, M.options.decimal_count)))
 		table.insert(virtual_text, pxrem)
 	end
 
@@ -124,7 +135,7 @@ M.dot_px_to_rem_at_cursor = function()
 	end
 
 	local rem_size = px_size / M.options.root_font_size
-	local rem = string.format("%srem", tostring(utils.round(tostring(rem_size), M.options.decimal_count)))
+	local rem = string.format("%srem", tostring(utils.round(rem_size, M.options.decimal_count)))
 
 	vim.api.nvim_buf_set_text(0, line - 1, word_start, line - 1, word_end, { rem })
 end
@@ -135,20 +146,42 @@ M.px_to_rem_on_line = function()
 end
 
 M.dot_px_to_rem_on_line = function()
-	local line = vim.api.nvim_win_get_cursor(0)[1]
-	local line_content = vim.api.nvim_buf_get_lines(0, line - 1, line, false)[1]
-	local new_line = line_content
-	local utils = require("nvim-px-to-rem.utils")
+	local line_start
+	local line_end
 
-	for rem in line_content:gmatch("(-?%d+%.?%d*)px") do
-		local rem_size = tonumber(rem)
-		local px_size = rem_size / M.options.root_font_size
-		local pxrem = string.format("%srem", tostring(utils.round(tostring(px_size), M.options.decimal_count)))
-
-		new_line = new_line:gsub("(-?%d+%.?%d*)px", pxrem, 1)
+	if M.range.range == 0 then
+		line_start = vim.api.nvim_win_get_cursor(0)[1]
+		line_end = line_start
+	else
+		line_start = M.range.line1
+		line_end = M.range.line2
 	end
 
-	vim.api.nvim_buf_set_lines(0, line - 1, line, false, { new_line })
+	local found = false
+	local new_lines = {}
+	for line = line_start, line_end do
+		local line_content = vim.api.nvim_buf_get_lines(0, line - 1, line, false)[1]
+		local new_line = line_content
+		local utils = require("nvim-px-to-rem.utils")
+
+		for rem in line_content:gmatch("(-?%d+%.?%d*)px") do
+			local rem_size = tonumber(rem)
+			local px_size = rem_size / M.options.root_font_size
+			local pxrem = string.format("%srem", tostring(utils.round(px_size, M.options.decimal_count)))
+
+			found = true
+			new_line = new_line:gsub("(-?%d+%.?%d*)px", pxrem, 1)
+		end
+
+		table.insert(new_lines, new_line)
+	end
+
+	if not found then
+		vim.notify("No px value found", vim.log.levels.WARN)
+		return
+	end
+
+	vim.api.nvim_buf_set_lines(0, line_start - 1, line_end, false, new_lines)
 end
 
 return M
