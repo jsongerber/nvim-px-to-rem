@@ -69,7 +69,7 @@ M.px_to_rem = function()
 	for rem in line_content:gmatch("(-?%d+%.?%d*)rem") do
 		local rem_size = tonumber(rem)
 		local px_size = rem_size * M.options.root_font_size
-		local pxrem = string.format("%spx", tostring(utils.round(tostring(px_size), M.options.decimal_count)))
+		local pxrem = string.format("%spx", tostring(utils.round(px_size, M.options.decimal_count)))
 		table.insert(virtual_text, pxrem)
 	end
 
@@ -124,7 +124,7 @@ M.dot_px_to_rem_at_cursor = function()
 	end
 
 	local rem_size = px_size / M.options.root_font_size
-	local rem = string.format("%srem", tostring(utils.round(tostring(rem_size), M.options.decimal_count)))
+	local rem = string.format("%srem", tostring(utils.round(rem_size, M.options.decimal_count)))
 
 	vim.api.nvim_buf_set_text(0, line - 1, word_start, line - 1, word_end, { rem })
 end
@@ -143,7 +143,7 @@ M.dot_px_to_rem_on_line = function()
 	for rem in line_content:gmatch("(-?%d+%.?%d*)px") do
 		local rem_size = tonumber(rem)
 		local px_size = rem_size / M.options.root_font_size
-		local pxrem = string.format("%srem", tostring(utils.round(tostring(px_size), M.options.decimal_count)))
+		local pxrem = string.format("%srem", tostring(utils.round(px_size, M.options.decimal_count)))
 
 		new_line = new_line:gsub("(-?%d+%.?%d*)px", pxrem, 1)
 	end
