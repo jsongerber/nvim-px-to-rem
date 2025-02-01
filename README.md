@@ -2,7 +2,7 @@
 
 > Easily work with rem in your css files
 
-A Neovim plugin written in lua to convert px to rem as you type. It also provide commands and [~~keymaps~~](#-keymaps) to convert px to rem and a virtual text to visualize your rem values.
+A Neovim plugin written in lua to convert px to rem as you type. It also provide commands to convert px to rem and a virtual text to visualize your rem values.
 
 <div align="center">
 
@@ -143,22 +143,23 @@ return {
 
 ## 🧰 Commands
 
-| Command          | Description                         |
-| ---------------- | ----------------------------------- |
-| `:PxToRemCursor` | Convert px to rem under cursor      |
-| `:PxToRemLine`   | Convert px to rem on the whole line |
+| Command          | Description                                           |
+| ---------------- | ----------------------------------------------------- |
+| `:PxToRemCursor` | Convert px to rem under cursor                        |
+| `:PxToRemLine`   | Convert px to rem on the whole line, can take a range |
 
 ## 📚 Keymaps
 
-> [!WARNING]
-> This plugin used to provide default keymaps but it was removed as it was poorly chosen.
-> If you used default keymaps you will need to set them yourself.
-
+This plugin does not set any keymaps by default.
 You can set keymaps like so:
 
 ```lua
+-- Convert px to rem under cursor
 vim.api.nvim_set_keymap("n", "<leader>pxx", ":PxToRemCursor<CR>", { noremap = true })
+-- Convert px to rem on the whole line
 vim.api.nvim_set_keymap("n", "<leader>pxl", ":PxToRemLine<CR>", { noremap = true })
+-- Convert px to rem on all the selected lines
+vim.api.nvim_set_keymap("v", "<leader>px", ":PxToRemLine<CR>", { noremap = true })
 ```
 
 ## ⌨ Contributing
