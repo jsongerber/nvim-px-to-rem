@@ -37,6 +37,10 @@ function M:complete(params, callback)
 	local px = string.match(input, "%d+%.?%d*")
 
 	local px_size = tonumber(px)
+	if px_size == nil then
+		callback()
+		return
+	end
 	local rem_size = px_size / self.root_font_size
 	local pxrem = string.format("%srem", tostring(utils.round(rem_size, self.decimal_count)))
 
